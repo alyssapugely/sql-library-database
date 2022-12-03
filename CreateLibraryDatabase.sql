@@ -1,0 +1,39 @@
+CREATE TABLE Client (
+  ClientID INT(15) NOT NULL AUTO_INCREMENT,
+  ClientFirstName VARCHAR(45) NOT NULL,
+  ClientLastName VARCHAR(45) NOT NULL,
+  ClientDoB INT(4) NOT NULL,
+  Occupation VARCHAR(45) NOT NULL
+    PRIMARY KEY (ClientID)
+);
+
+CREATE TABLE Borrower (
+  BorrowID INT(15) NOT NULL AUTO_INCREMENT,
+  ClientID INT(15) NOT NULL,
+  BookID INT(15) NOT NULL,
+  BorrowDate DATE NOT NULL,
+   PRIMARY KEY (BorrowID)
+   FOREIGN KEY (ClientID) REFERENCES Client (ClientID)
+);
+
+CREATE TABLE Book (
+  BookID INT(15), NOT NULL AUTO_INCREMENT,
+  BookTitle VARCHAR(45) NOT NULL,
+  BookAuthor INT(15) NOT NULL,
+  Genre VARCHAR(45) NOT NULL,
+   PRIMARY KEY (BookID)
+);
+
+ALTER TABLE Borrower
+ADD FOREIGN KEY (BookID) REFERENCES Book (BookID);
+
+CREATE TABLE Author (
+  AuthorID INT(15) NOT NULL AUTO_INCREMENT,
+  AuthorFirstName VARCHAR(45) NOT NULL,
+  AuthorLastName VARCHAR(45) NOT NULL,
+  AuthorNationality VARCHAR(45) NOT NULL,
+   PRIMARY KEY (AuthorID)
+);
+   
+ALTER TABLE Book
+ADD FOREIGN KEY (BookAuthor) REFERENCES Author (AuthorID);
